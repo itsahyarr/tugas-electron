@@ -4,10 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
     <title>List Articles</title>
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body>
     <h1>List Articles</h1>
+    <div id="output">
+        <!-- <h3 class="title"></h3>
+        <p class="summary"></p> -->
+    </div>
     
 </body>
+<script>
+    // document.getElementById('output').innerHTML = 
+    const API = 'http://192.168.101.53:5050/api/articles'
+    var requestOptions = {
+        method: 'GET',
+        headers: {
+            authorization: 'Bearer ' + localStorage.token
+        },
+        redirect: 'follow'
+    }
+    // console.log(requestOptions)
+    fetch(API, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        let res_html = ''
+        result.data.forEach(d => {
+            res_html += `
+
+            <div class="container card" style="width: 100%;">
+  <div class="card-body">
+    <h5 class="card-title">${d.title}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Created by : ${d.user.name}</h6>
+    <p class="card-text">${d.summary}</p>
+    
+  </div>
+</div>
+            `
+        });
+        document.getElementById('output').innerHTML = res_html;
+    // console.log(result)
+    // e.target.reset()
+    // document.getElementById('tab-login').click()
+    })
+    .catch(error => {
+    console.log('error', error)
+    alert(error.name)
+    });
+</script><script src="../node_modules/mdb-ui-kit/js/mdb.min.js"> </script>
+
 </html>

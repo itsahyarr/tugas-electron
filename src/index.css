@@ -7,3 +7,8 @@ body {
   max-width: 38rem;
   padding: 2rem;
 }
+#output {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

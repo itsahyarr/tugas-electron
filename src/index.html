@@ -201,7 +201,7 @@ rel="stylesheet"
       body: raw
     };
 
-    fetch("http://127.0.0.1:5050/api/user", requestOptions)
+    fetch("http://192.168.101.53:5050/api/user", requestOptions)
       .then(response => response.text())
       .then(result => {
         // console.log(result)
@@ -231,7 +231,7 @@ rel="stylesheet"
       body: raw
     };
 
-    fetch("http://127.0.0.1:5050/api/login", requestOptions)
+    fetch("http://192.168.101.53:5050/api/login", requestOptions)
       .then(response => response.json())
       .then(result => {
         // console.log(result)
@@ -239,6 +239,8 @@ rel="stylesheet"
         // document.getElementById('tab-login').click()
         console.log('login berhasil')
         alert(`Login Berhasil\n\nSelamat Datang ${data.username}\n\nToken : ${result.data.token}\nExpires at : ${result.data.expiresAt}`)
+        localStorage.setItem('token',result.data.token)
+        location.href = 'articles.html';
       })
       .catch(error => {
         // console.log('error', error)
